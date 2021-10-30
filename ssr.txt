@@ -1,0 +1,12 @@
+// ked pouzivam queries a ich obsah je dolezity z hladiska SEO 
+// vyhladavania 
+// vtedy na tych strankach (napr. homepage) pouzijem 
+// server-side-rendering
+
+steps: 
+
+me -> browse http://localhost:3000
+-> next.js server
+-> request graphql server localhost:4000
+-> building the HTML
+-> sending back to your browser

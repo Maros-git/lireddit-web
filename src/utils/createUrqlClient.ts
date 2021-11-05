@@ -107,13 +107,13 @@ exchanges: [
         },
         updates: {
           Mutation: {
-            deletePost: (_result, args, cache) => {
+            deletePost: (_result, args, cache, _info) => {
               cache.invalidate({
                 __typename: 'Post',
                 id: (args as DeletePostMutationVariables).id
               });
             },
-            vote: (_result, args, cache) => {
+            vote: (_result, args, cache, _info) => {
               const {postId, value} = args as VoteMutationVariables;
               const data = cache.readFragment(
                 gql`
@@ -141,10 +141,10 @@ exchanges: [
               );
               }
             },
-            createPost: (_result, _args, cache) => {
+            createPost: (_result, _args, cache, _info) => {
               invalidateAllPosts(cache)
             },
-            logout: (_result, _args, cache) => {
+            logout: (_result, _args, cache, _info) => {
               betterUpdateQuery<LogoutMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -152,7 +152,7 @@ exchanges: [
                 () => ({me: null})
               )
             },
-            login: (_result, _args, cache) => {
+            login: (_result, _args, cache, _info) => {
               betterUpdateQuery<LoginMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -169,7 +169,7 @@ exchanges: [
                 );
                 invalidateAllPosts(cache)
               },
-              register: (_result, _args, cache) => {
+              register: (_result, _args, cache, _info) => {
                 betterUpdateQuery<RegisterMutation, MeQuery>(
                   cache,
                   {query: MeDocument},

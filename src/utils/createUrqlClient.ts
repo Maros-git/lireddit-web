@@ -85,7 +85,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
   }
 
   return {
-    url: 'lireddit-server-iota.vercel.app',
+    url: 'http://localhost:4000/graphql',
     fetchOptions: {
       credentials: "include" as const,
       headers: cookie 
@@ -107,13 +107,13 @@ exchanges: [
         },
         updates: {
           Mutation: {
-            deletePost: (_result, args, cache, info) => {
+            deletePost: (_result, args, cache) => {
               cache.invalidate({
                 __typename: 'Post',
                 id: (args as DeletePostMutationVariables).id
               });
             },
-            vote: (_result, args, cache, info) => {
+            vote: (_result, args, cache) => {
               const {postId, value} = args as VoteMutationVariables;
               const data = cache.readFragment(
                 gql`
@@ -141,10 +141,10 @@ exchanges: [
               );
               }
             },
-            createPost: (_result, args, cache, info) => {
+            createPost: (_result, args, cache) => {
               invalidateAllPosts(cache)
             },
-            logout: (_result, args, cache, info) => {
+            logout: (_result, args, cache) => {
               betterUpdateQuery<LogoutMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -152,7 +152,7 @@ exchanges: [
                 () => ({me: null})
               )
             },
-            login: (_result, args, cache, info) => {
+            login: (_result, args, cache) => {
               betterUpdateQuery<LoginMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -169,7 +169,7 @@ exchanges: [
                 );
                 invalidateAllPosts(cache)
               },
-              register: (_result, args, cache, info) => {
+              register: (_result, args, cache) => {
                 betterUpdateQuery<RegisterMutation, MeQuery>(
                   cache,
                   {query: MeDocument},

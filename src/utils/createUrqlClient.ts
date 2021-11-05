@@ -85,7 +85,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
   }
 
   return {
-    url: 'http://localhost:4000/graphql',
+    url: 'lireddit-server-iota.vercel.app',
     fetchOptions: {
       credentials: "include" as const,
       headers: cookie 

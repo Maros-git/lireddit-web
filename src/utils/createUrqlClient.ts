@@ -141,10 +141,11 @@ exchanges: [
               );
               }
             },
-            createPost: (_result, args, cache) => {
+            createPost: (_result, _args, cache) => {
               invalidateAllPosts(cache)
             },
-            logout: (_result, args, cache) => {
+            logout: (_result, _args, cache) => {
+
               betterUpdateQuery<LogoutMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -152,7 +153,8 @@ exchanges: [
                 () => ({me: null})
               )
             },
-            login: (_result, args, cache) => {
+
+            login: (_result, _args, cache) => {
               betterUpdateQuery<LoginMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -169,7 +171,10 @@ exchanges: [
                 );
                 invalidateAllPosts(cache)
               },
-              register: (_result, args, cache) => {
+
+              register: (_result, _args, cache) => {
+
+
                 betterUpdateQuery<RegisterMutation, MeQuery>(
                   cache,
                   {query: MeDocument},

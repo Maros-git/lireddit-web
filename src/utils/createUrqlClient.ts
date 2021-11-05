@@ -145,6 +145,7 @@ exchanges: [
               invalidateAllPosts(cache)
             },
             logout: (_result, _args, cache) => {
+
               betterUpdateQuery<LogoutMutation, MeQuery>(
                 cache,
                 {query: MeDocument},
@@ -152,6 +153,7 @@ exchanges: [
                 () => ({me: null})
               )
             },
+
             login: (_result, _args, cache) => {
               betterUpdateQuery<LoginMutation, MeQuery>(
                 cache,
@@ -169,7 +171,10 @@ exchanges: [
                 );
                 invalidateAllPosts(cache)
               },
+
               register: (_result, _args, cache) => {
+
+
                 betterUpdateQuery<RegisterMutation, MeQuery>(
                   cache,
                   {query: MeDocument},
